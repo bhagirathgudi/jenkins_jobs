@@ -12,6 +12,9 @@ job("$basePath/build") {
       }
       
       steps {
-        gradle 'clean build'
+            gradle{
+                  makeExecutable(boolean makeExecutable = true)
+                  tasks('clean build')      
+            } 
       }
 }
