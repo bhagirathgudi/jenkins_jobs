@@ -1,6 +1,6 @@
 
 def basePath ='iot_backend'
-def repo= 'bhagirathgudi/iot-backent'
+def repo= 'bhagirathgudi/iot-backend'
 folder(basePath)
 job("$basePath/build") {
       scm {
