@@ -6,7 +6,6 @@ job('example-job-from-jobb-dsl-2') {
     triggers {
         cron("@hourly")
     }
-
     steps {
         shell("echo 'Hello World'")
     }
