@@ -3,6 +3,8 @@ job('example-job-from-jobb-dsl-2') {
         github('bhagirathgudi/jenkins_jobs', 'master')
     }
 
+
+
     triggers {
         cron("@hourly")
     }
