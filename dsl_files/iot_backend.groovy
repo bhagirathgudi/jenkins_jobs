@@ -1,4 +1,4 @@
-def basePath ='iot_backend'
+def basePath ='/iot_backend'
 def repo= 'bhagirathgudi/iot-backent'
 
 job("$basePath/build") {
