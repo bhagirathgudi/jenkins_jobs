@@ -15,6 +15,13 @@ job("$basePath/build") {
             gradle{
                   makeExecutable(true)
                   tasks('clean build')      
-            } 
+            }
+            def app
+            app = docker.build("iot-backend")
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                  app.push("${env.BUILD_NUMBER}")
+                  app.push("latest")
+            }
       }
 }
+
