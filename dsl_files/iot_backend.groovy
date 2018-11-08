@@ -1,26 +1,45 @@
 
 def basePath ='iot_backend'
-def repo= 'bhagirathgudi/iot-backend'
+
 folder(basePath)
-job("$basePath/build") {
-      scm {
-        github repo
+def repo= 'bhagirathgudi/iot-backend'
+
+pipeline {
+      environment {
+            registry = "bhagirath93/iot-backend"
+            regsitryCredential = 'dockerhub'
+            dockerImage=''
       }
-      
-      triggers{
-        githubPush()
-      }
-      
-      steps {
-            gradle{
-                  makeExecutable(true)
-                  tasks('clean build')      
+      agent any
+      stages {
+            stage('Cloning git') {
+                  steps {
+                        github repo
+                  }
             }
-            def app
-            app = docker.build("iot-backend")
-            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                  app.push("${env.BUILD_NUMBER}")
-                  app.push("latest")
+            stage('Bulding project') {
+                  steps {
+                        gradle{
+                            makeExecutable(true)
+                            tasks('clean build')      
+                        }     
+                  }
+            }
+            stage ('Building image') {
+                  steps {
+                        script {
+                              dockerImage = docker.build.registry+ ":$BUID_NUMBER"
+                        }
+                  }
+            }
+            stage('Deploy Image') {
+                  steps {
+                        script {
+                              docker.withRegistry('',registryCredential) {
+                              dockerImage.push()
+                              }
+                        }
+                  }
             }
       }
 }
