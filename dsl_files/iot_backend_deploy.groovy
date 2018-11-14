@@ -6,19 +6,13 @@ def repo= 'bhagirathgudi/iot-backend'
 
 job(basePath+"/defaultjob") {
   
-  node {
-   stage('Cloning git') { // for display purposes
-      steps{
+    stage('Cloning git') { // for display purposes
 			github repo
-	  }
    }
    stage('Build') {
-      steps{
 			gradle {
 				makeExecutable(true)
 				tasks('clean build')
 			}
-	  }
    }
-}
 }
