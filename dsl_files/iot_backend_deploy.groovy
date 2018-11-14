@@ -7,7 +7,6 @@ def repo= 'bhagirathgudi/iot-backend'
 job(basePath+"/defaultjob") {
   
   node {
-   def repo = 'bhagirathgudi/iot-backend'
    stage('Cloning git') { // for display purposes
       steps{
 			github repo
