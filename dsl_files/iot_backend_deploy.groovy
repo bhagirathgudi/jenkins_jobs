@@ -4,7 +4,7 @@ def basePath ='iot_backend'
 folder(basePath)
 def repo= 'bhagirathgudi/iot-backend'
 
-node {
+job(basePath+"/defaultjob") {
       agent any
       stages {
             stage('Cloning git') {
