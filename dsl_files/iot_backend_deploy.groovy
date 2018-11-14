@@ -4,12 +4,7 @@ def basePath ='iot_backend'
 folder(basePath)
 def repo= 'bhagirathgudi/iot-backend'
 
-pipeline {
-      environment {
-            registry = "bhagirath93/iot-backend"
-            regsitryCredential = 'dockerhub'
-            dockerImage=''
-      }
+node {
       agent any
       stages {
             stage('Cloning git') {
